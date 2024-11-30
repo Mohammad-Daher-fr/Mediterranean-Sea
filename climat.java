@@ -101,33 +101,33 @@ public class climat {
                 saisonActuelle, temperature, humidite, pollution);
     }
 
-    // Méthode main
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("=== Simulation de Climat ===");
-
-        // Permet à l'utilisateur d'entrer plusieurs saisons
-        String saisonStr;
-        while (true) {
-            System.out.println("\nEntrez une saison:");
-            saisonStr = scanner.nextLine().toUpperCase();
-
-            if (saisonStr.equals("QUITTER")) {
-                break;
-            }
-
-            try {
-                // Conversion de la saisie en Saison
-                Saison saisonChoisie = Saison.valueOf(saisonStr);
-
-                // Création d'un climat avec la saison choisie
-                climat climat = new climat(saisonChoisie, 30);  // Pollution initiale fixée à 30
-                System.out.println("\nCaractéristiques pour la saison " + saisonStr + " :");
-                System.out.println(climat);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Saison invalide. Veuillez entrer une des saisons suivantes : PRINTEMPS, ÉTÉ, AUTOMNE, HIVER.");
-            }
-        }
-        scanner.close();
-    }
+//    // Méthode main
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("=== Simulation de Climat ===");
+//
+//        // Permet à l'utilisateur d'entrer plusieurs saisons
+//        String saisonStr;
+//        while (true) {
+//            System.out.println("\nEntrez une saison:");
+//            saisonStr = scanner.nextLine().toUpperCase();
+//
+//            if (saisonStr.equals("QUITTER")) {
+//                break;
+//            }
+//
+//            try {
+//                // Conversion de la saisie en Saison
+//                Saison saisonChoisie = Saison.valueOf(saisonStr);
+//
+//                // Création d'un climat avec la saison choisie
+//                climat climat = new climat(saisonChoisie, 30);  // Pollution initiale fixée à 30
+//                System.out.println("\nCaractéristiques pour la saison " + saisonStr + " :");
+//                System.out.println(climat);
+//            } catch (IllegalArgumentException e) {
+//                System.out.println("Saison invalide. Veuillez entrer une des saisons suivantes : PRINTEMPS, ÉTÉ, AUTOMNE, HIVER.");
+//            }
+//        }
+//        scanner.close();
+//    }
 }
