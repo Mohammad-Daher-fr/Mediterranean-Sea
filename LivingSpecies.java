@@ -1,4 +1,4 @@
-public class LivingSpecies {
+public abstract class LivingSpecies {
     private int health;
     private boolean fertility;
     private boolean presence;
@@ -33,34 +33,11 @@ public class LivingSpecies {
         this.presence = presence;
     }
 
-    public void eat(int foodAmount) {
-        if (presence) {
-            health++;
-            System.out.println("The species has eaten " + foodAmount + " units of food. Health is now " + health + ".");
-        } else {
-            System.out.println("The species is not present and cannot eat.");
-        }
-    }
+    public abstract void eat(int foodAmount);
 
-    public LivingSpecies reproduce() {
-        if (presence && fertility) {
-            LivingSpecies newSpecies = new LivingSpecies(health/2, true, true);
-            System.out.println("A new species has been created with health."+getHealth());
-            return newSpecies;
-        } else {
-            System.out.println("The species cannot reproduce.");
-            return null;
-        }
-    }
+    public abstract LivingSpecies reproduce();
 
-    public void die() {
-        presence = false;
-        health = 0;
-        System.out.println("The species has died.");
-    }
+    public abstract void die();
 
-    public void disappear() {
-        presence = false;
-        System.out.println("The species has disappeared.");
-    }
+    public abstract void disappear();
 }
