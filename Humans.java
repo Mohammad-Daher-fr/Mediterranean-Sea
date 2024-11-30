@@ -52,10 +52,11 @@ public class Humans extends LivingSpecies{
         System.out.println(job + " is fishing.");
     }
 
-    /*public void pollute(Climate climate, double amount) {
-        climate.toxicity(amount);
+    public void pollute(Climate climate, float amount) {
+        climate.incrementPollution(amount);
         System.out.println(job + " has polluted the environment by " + amount + " units.");
-    }*/
+    }
+
 
     public void regulate() {
         System.out.println(job + " is regulating the environment.");
