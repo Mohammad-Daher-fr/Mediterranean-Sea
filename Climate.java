@@ -4,7 +4,7 @@ enum Season {
     SPRING, SUMMER, AUTUMN, WINTER
 }
 
-class Climate {
+public class Climate {
     private Season currentSeason;
     private double temperature;
     private double pollution;
