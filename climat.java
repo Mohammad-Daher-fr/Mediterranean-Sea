@@ -1,21 +1,19 @@
 import java.util.Random;
-import java.util.Scanner;
 
-enum Saison {
-    PRINTEMPS, ÉTÉ, AUTOMNE, HIVER
+enum Season {
+    SPRING, SUMMER, AUTUMN, WINTER
 }
 
-public class climat {
-    private Saison saisonActuelle;
+class Climate {
+    private Season currentSeason;
     private double temperature;
-    private double humidite;
     private double pollution;
     private final Random random = new Random();
 
-    public climat(Saison saison, double pollution) {
-        this.saisonActuelle = saison;
+    public Climate(Season season, double pollution) {
+        this.currentSeason = season;
         this.pollution = Math.max(0, Math.min(100, pollution));
-        ajusterConditions();
+        adjustConditions();
     }
 
     public double getPollution() {
@@ -24,71 +22,64 @@ public class climat {
 
     public void setPollution(double pollution) {
         this.pollution = Math.max(0, Math.min(100, pollution));
-        ajusterConditions();
+        adjustConditions();
     }
 
-    public void setSaison(Saison saison) {
-        this.saisonActuelle = saison;
-        ajusterConditions();
+    public void setSeason(Season season) {
+        this.currentSeason = season;
+        adjustConditions();
     }
 
-    private void ajusterConditions() {
-        // Ajuster la pollution selon la saison
-        ajusterPollutionSelonSaison();
+    private void adjustConditions() {
+        adjustPollutionBySeason();
 
-        // Ajuster la température et l'humidité selon la saison et la pollution
-        switch (saisonActuelle) {
-            case PRINTEMPS:
-                temperature = randomInRange(15, 25) + effetPollutionSurTemperature();
-                humidite = calculerHumidite(temperature, 60, 80);
+        switch (currentSeason) {
+            case SPRING:
+                temperature = randomInRange(15, 25) + pollutionEffectOnTemperature();
                 break;
-            case ÉTÉ:
-                temperature = randomInRange(25, 35) + effetPollutionSurTemperature();
-                humidite = calculerHumidite(temperature, 40, 60);
+            case SUMMER:
+                temperature = randomInRange(25, 35) + pollutionEffectOnTemperature();
                 break;
-            case AUTOMNE:
-                temperature = randomInRange(10, 20) + effetPollutionSurTemperature();
-                humidite = calculerHumidite(temperature, 50, 70);
+            case AUTUMN:
+                temperature = randomInRange(10, 20) + pollutionEffectOnTemperature();
                 break;
-            case HIVER:
-                temperature = randomInRange(-5, 5) + effetPollutionSurTemperature();
-                humidite = calculerHumidite(temperature, 30, 50);
+            case WINTER:
+                temperature = randomInRange(-5, 5) + pollutionEffectOnTemperature();
                 break;
         }
-        humidite = Math.max(0, Math.min(100, humidite)); // Limiter l'humidité entre 0 et 100
     }
 
-    private void ajusterPollutionSelonSaison() {
-        switch (saisonActuelle) {
-            case PRINTEMPS:
-                pollution = pollution + randomInRange(-5, 5); // Légère variation de pollution en printemps
+    private void adjustPollutionBySeason() {
+        switch (currentSeason) {
+            case SPRING:
+                pollution = pollution + randomInRange(-5, 5);
                 break;
-            case ÉTÉ:
-                pollution = pollution + randomInRange(10, 20); // Pollution plus élevée en été
+            case SUMMER:
+                pollution = pollution + randomInRange(10, 20);
                 break;
-            case AUTOMNE:
-                pollution = pollution + randomInRange(-5, 5); // Pollution légèrement plus basse en automne
+            case AUTUMN:
+                pollution = pollution + randomInRange(-5, 5);
                 break;
-            case HIVER:
-                pollution = pollution - randomInRange(5, 15); // Pollution réduite en hiver
+            case WINTER:
+                pollution = pollution - randomInRange(5, 15);
                 break;
         }
-        pollution = Math.max(0, Math.min(100, pollution)); // Limiter la pollution entre 0 et 100
+        pollution = Math.max(0, Math.min(100, pollution));
     }
 
-    private double effetPollutionSurTemperature() {
-        return pollution * 0.05;
-    }
-
-    private double calculerHumidite(double temperature, double minHumidite, double maxHumidite) {
-        // L'humidité dépend de la température et de la pollution
-        double variationTemperature = (temperature - 20) * 0.5; // Ajustement de l'humidité basé sur la température
-        double humiditeSansPollution = randomInRange(minHumidite, maxHumidite);
-        double effetPollution = pollution * 0.02;
-
-        // Ajouter l'effet de la température et de la pollution sur l'humidité
-        double humiditeAvecEffets = humiditeSansPollution + variationTemperature - effetPollution;
-        return Math.max(0, Math.min(100, humiditeAvecEffets));
+    private double pollutionEffectOnTemperature() {
+        switch (currentSeason) {
+            case SUMMER:
+                return pollution * 0.1;
+            case SPRING:
+                return pollution * 0.08;
+            case AUTUMN:
+                return pollution * 0.05;
+            case WINTER:
+                return pollution * 0.02;
+            default:
+                return 0;
+        }
     }
 
     private double randomInRange(double min, double max) {
@@ -97,37 +88,6 @@ public class climat {
 
     @Override
     public String toString() {
-        return String.format("Climat actuel -> Saison: %s, Température: %.1f°C, Humidité: %.1f%%, Pollution: %.1f",
-                saisonActuelle, temperature, humidite, pollution);
+        return String.format("Pollution: %.1f, Temperature: %.1f°C", pollution, temperature);
     }
-
-//    // Méthode main
-//    public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("=== Simulation de Climat ===");
-//
-//        // Permet à l'utilisateur d'entrer plusieurs saisons
-//        String saisonStr;
-//        while (true) {
-//            System.out.println("\nEntrez une saison:");
-//            saisonStr = scanner.nextLine().toUpperCase();
-//
-//            if (saisonStr.equals("QUITTER")) {
-//                break;
-//            }
-//
-//            try {
-//                // Conversion de la saisie en Saison
-//                Saison saisonChoisie = Saison.valueOf(saisonStr);
-//
-//                // Création d'un climat avec la saison choisie
-//                climat climat = new climat(saisonChoisie, 30);  // Pollution initiale fixée à 30
-//                System.out.println("\nCaractéristiques pour la saison " + saisonStr + " :");
-//                System.out.println(climat);
-//            } catch (IllegalArgumentException e) {
-//                System.out.println("Saison invalide. Veuillez entrer une des saisons suivantes : PRINTEMPS, ÉTÉ, AUTOMNE, HIVER.");
-//            }
-//        }
-//        scanner.close();
-//    }
 }
