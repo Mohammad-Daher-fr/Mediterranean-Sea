@@ -30,6 +30,10 @@ class Climate {
         adjustConditions();
     }
 
+    public void incrementPollution(float amount) {
+        this.pollution += amount;
+    }
+
     private void adjustConditions() {
         adjustPollutionBySeason();
 
