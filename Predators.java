@@ -1,7 +1,8 @@
-public class Predators {
+public class Predators extends Animals{
     private String correspondingPreys;
 
-    public Predators(String correspondingPreys) {
+    public Predators(int health, boolean fertility, boolean presence, String race, boolean status, String correspondingPreys) {
+        super(health, fertility, presence, race, status);
         this.correspondingPreys = correspondingPreys;
     }
 
