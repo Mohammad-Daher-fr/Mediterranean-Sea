@@ -30,7 +30,7 @@ public class Climate {
         adjustConditions();
     }
 
-    public void incrementPollution(float amount) {
+    public void incrementPollution(double amount) {
         this.pollution += amount;
     }
 
