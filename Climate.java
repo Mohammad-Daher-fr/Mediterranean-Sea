@@ -25,13 +25,14 @@ public class Climate {
         adjustConditions();
     }
 
-    public void setSeason(Season season) {
-        this.currentSeason = season;
+    public void setSeason(Season newSeason) {
+        this.currentSeason = newSeason;
         adjustConditions();
     }
 
     public void incrementPollution(double amount) {
         this.pollution += amount;
+        System.out.println("Pollution increased by " + amount + ". Total pollution: " + pollution);
     }
 
     private void adjustConditions() {

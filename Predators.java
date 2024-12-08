@@ -14,20 +14,15 @@ public class Predators extends Animals{
         this.correspondingPreys = correspondingPreys;
     }
 
-    @Override
     public void eat(int foodAmount) {
-        if (isPresence()) {
-            setHealth(getHealth() + foodAmount);
-            System.out.println("The predator has eaten " + foodAmount + " units of food. Health is now " + getHealth() + ".");
-        } else {
-            System.out.println("The predator is not present and cannot eat.");
-        }
+        validatePresence("eat");
+        consumeResources(foodAmount);
     }
 
     @Override
     public LivingSpecies reproduce() {
         if (isFertility() && isPresence()) {
-            Predators predator = new Predators(getHealth() / 2, true, true,getRace(),isStatus(), getCorrespondingPreys());
+            Predators predator = new Predators(getHealth() / 2, true, true,getType(),isStatus(), getCorrespondingPreys());
             System.out.println("A new predator has been created with health " + predator.getHealth() + ".");
             return predator;
         } else {

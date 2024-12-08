@@ -1,4 +1,4 @@
-public class Plants extends LivingSpecies {
+public class Plants extends LivingSpecies implements Survivor,Reproducers{
     private float density;
 
     public Plants(int health, boolean fertility, boolean presence, float density) {
@@ -15,9 +15,11 @@ public class Plants extends LivingSpecies {
     }
 
     @Override
-    public void eat(int foodAmount) {
-        // Implementation for plants, e.g., absorbing nutrients
-        System.out.println("Plant is absorbing " + foodAmount + " units of nutrients.");
+    public void consumeResources(int amount) {
+        if (!isPresence()) {
+            throw new IllegalStateException("Plant is not present and cannot absorb resources.");
+        }
+        System.out.println("Plant is absorbing " + amount + " units of nutrients.");
     }
 
     @Override

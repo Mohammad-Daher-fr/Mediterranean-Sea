@@ -1,19 +1,26 @@
-public class Animals extends LivingSpecies {
-    private String race;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Animals extends LivingSpecies implements Reproducers,Movable{
+    private String type;
     private boolean status;
+    private static List<Animals> fishPopulation = new ArrayList<>();
 
-    public Animals(int health, boolean fertility, boolean presence, String race, boolean status) {
+    public Animals(int health, boolean fertility, boolean presence, String type, boolean status) {
         super(health, fertility, presence);
-        this.race = race;
+        this.type = type;
         this.status = status;
+        if(type.equals("Fish")) {
+            fishPopulation.add(this);// add into the population si c'est un poisson
+        }
     }
 
-    public String getRace() {
-        return race;
+    public String getType() {
+        return type;
     }
 
-    public void setRace(String race) {
-        this.race = race;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public boolean isStatus() {
@@ -24,17 +31,38 @@ public class Animals extends LivingSpecies {
         this.status = status;
     }
 
-    @Override
-    public void eat(int foodAmount) {
-        // Implementation of eating behavior
-        System.out.println("The animal eats " + foodAmount + " units of food.");
+    public static int getFishPopulationSize() {
+        return fishPopulation.size();
+    }
+
+    public static Animals catchFish(String type) {
+        for (Animals fish : fishPopulation) {
+            if (fish.getType().equalsIgnoreCase(type)) {
+                fishPopulation.remove(fish);
+                return fish;
+            }
+        }
+        System.out.println("No fish of type " + type + " found!");
+        return null;
     }
 
     @Override
     public LivingSpecies reproduce() {
         // Implementation of reproduction behavior
         System.out.println("The animal reproduces.");
-        return new Animals(getHealth(), isFertility(), isPresence(), this.race, this.status);
+        return new Animals(getHealth(), isFertility(), isPresence(), this.type, this.status);
+    }
+
+    @Override
+    public void consumeResources(int foodAmount) {
+        validatePresence("consume resources");
+        System.out.println("The animal consumes " + foodAmount + " units of food.");
+    }
+
+    @Override
+    public void move() {
+        validatePresence("move to a new location");
+        System.out.println("Animal is moving to a new location.");
     }
 
     @Override
@@ -42,6 +70,9 @@ public class Animals extends LivingSpecies {
         // Implementation of dying behavior
         System.out.println("The animal dies.");
         setPresence(false);
+        if (type.equalsIgnoreCase("Fish")) {
+            fishPopulation.remove(this); // remove le poisson de la population
+        }
     }
 
     @Override

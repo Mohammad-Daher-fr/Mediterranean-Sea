@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class FishingTrawler extends Vehicle {
+public class FishingTrawler extends Vehicle implements Movable {
     private double fishCapacity;
     private double maxFishCapacity;
     private double damageLevel;
@@ -29,6 +29,11 @@ public class FishingTrawler extends Vehicle {
                 ", Max Capacity: " + String.format("%.1f", maxFishCapacity) + " tons" +
                 ", Damage Level: " + String.format("%.1f", damageLevel) + "%.");
 
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Fishing boat is moving to a new fishing area.");
     }
 
     public void fish() {

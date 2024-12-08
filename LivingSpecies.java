@@ -1,4 +1,4 @@
-public abstract class LivingSpecies {
+public abstract class LivingSpecies implements Survivor,Reproducers {
     private int health;
     private boolean fertility;
     private boolean presence;
@@ -33,11 +33,15 @@ public abstract class LivingSpecies {
         this.presence = presence;
     }
 
-    public abstract void eat(int foodAmount);
-
-    public abstract LivingSpecies reproduce();
+    protected void validatePresence(String action) {
+        if (!isPresence()) {
+            throw new IllegalStateException("Not present and cannot " + action + ".");
+        }
+    }
 
     public abstract void die();
 
     public abstract void disappear();
 }
+
+

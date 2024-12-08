@@ -39,10 +39,10 @@ public class Preys extends Animals {
         System.out.println("Prey is fighting.");
     }
 
-    @Override
+
     public void eat(int foodAmount) {
-        // Implementation for eating
-        System.out.println("Prey is eating " + foodAmount + " units of food.");
+        validatePresence("eat");
+        consumeResources(foodAmount);
     }
 
     @Override
