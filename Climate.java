@@ -30,6 +30,14 @@ public class Climate {
         adjustConditions();
     }
 
+    public Season getCurrentSeason() {
+        return currentSeason;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
     public void incrementPollution(double amount) {
         this.pollution += amount;
         System.out.println("Pollution increased by " + amount + ". Total pollution: " + pollution);

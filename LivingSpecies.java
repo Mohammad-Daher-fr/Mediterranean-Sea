@@ -35,7 +35,7 @@ public abstract class LivingSpecies implements Survivor,Reproducers {
 
     protected void validatePresence(String action) {
         if (!isPresence()) {
-            throw new IllegalStateException("Not present and cannot " + action + ".");
+            throw new IllegalStateException(getClass().getSimpleName()+ " is not present and cannot " + action + ".");
         }
     }
 

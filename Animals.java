@@ -36,7 +36,7 @@ public class Animals extends LivingSpecies implements Reproducers,Movable{
     }
 
     public static Animals catchFish(String type) {
-        for (Animals fish : fishPopulation) {
+        for (Animals fish : fishPopulation) { // Parcourt tous les poissons dans fishPopulation
             if (fish.getType().equalsIgnoreCase(type)) {
                 fishPopulation.remove(fish);
                 return fish;
@@ -60,9 +60,10 @@ public class Animals extends LivingSpecies implements Reproducers,Movable{
     }
 
     @Override
-    public void move() {
+    public boolean move() {
         validatePresence("move to a new location");
         System.out.println("Animal is moving to a new location.");
+        return true;
     }
 
     @Override

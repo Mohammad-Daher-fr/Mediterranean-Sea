@@ -32,8 +32,9 @@ public class FishingTrawler extends Vehicle implements Movable {
     }
 
     @Override
-    public void move() {
+    public boolean move() {
         System.out.println("Fishing boat is moving to a new fishing area.");
+        return true;
     }
 
     public void fish() {
