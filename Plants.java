@@ -1,9 +1,11 @@
 public class Plants extends LivingSpecies implements Survivor,Reproducers{
     private float density;
+    private boolean isVenomous; // Indique si la plante est vénéneuse
 
-    public Plants(int health, boolean fertility, boolean presence, float density) {
+    public Plants(int health, boolean fertility, boolean presence, float density, boolean isVenomous) {
         super(health, fertility, presence);
         this.density = density;
+        this.isVenomous = isVenomous;
     }
 
     public float getDensity() {
@@ -14,11 +16,17 @@ public class Plants extends LivingSpecies implements Survivor,Reproducers{
         this.density = density;
     }
 
+    public boolean isVenomous() {
+        return isVenomous;
+    }
+
+    public void setVenomous(boolean venomous) {
+        isVenomous = venomous;
+    }
+
     @Override
     public void consumeResources(int amount) {
-        if (!isPresence()) {
-            throw new IllegalStateException("Plant is not present and cannot absorb resources.");
-        }
+        validatePresence("absorb resources");
         System.out.println("Plant is absorbing " + amount + " units of nutrients.");
     }
 
@@ -26,7 +34,7 @@ public class Plants extends LivingSpecies implements Survivor,Reproducers{
     public LivingSpecies reproduce() {
         // Implementation for plant reproduction
         System.out.println("Plant is reproducing.");
-        return new Plants(getHealth(), isFertility(), isPresence(), density);
+        return new Plants(getHealth(), isFertility(), isPresence(), density, isVenomous);
     }
 
     @Override
@@ -43,13 +51,24 @@ public class Plants extends LivingSpecies implements Survivor,Reproducers{
         setPresence(false);
     }
 
-    public void beingEaten() {
-        // Implementation for being eaten
-        System.out.println("Plant is being eaten.");
+    public boolean canBeEaten() {
+        if (isVenomous) {
+            System.out.println("This plant is venomous and cannot be eaten.");
+            return false;
+        } else {
+            System.out.println("This plant is safe to eat.");
+            return true;
+        }
     }
 
-    public void shelter() {
-        // Implementation for shelter
-        System.out.println("Plant is providing shelter.");
+    public boolean provideShelter() {
+        if (density > 5.0) {
+            System.out.println("Plant is providing shelter.");
+            return true;
+        } else {
+            System.out.println("Plant's density is too low to provide shelter.");
+            return false;
+        }
     }
+
 }
