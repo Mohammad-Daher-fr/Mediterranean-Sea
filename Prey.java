@@ -75,10 +75,11 @@ public class Prey extends Animal implements Survivor {
         setPresence(false);
     }
 
+
     public int flee() {
         Random random = new Random();
         int amount = random.nextInt(100) + 1; // entre 1 et 100 inclus
-        System.out.println(amount +" of "+preyType+" is fleeing " +  " from "+ correspondingPredator+".");
+        System.out.println(amount +" of "+preyType+"flees by hiding or blending in with the school.");
         return amount;
     }
 

@@ -58,6 +58,7 @@ public class Predator extends Animal {
         setStatus(false);
     }
 
+    @Override
     public int hunt() {
         validatePresence("hunt");
         Random random = new Random();

@@ -27,4 +27,34 @@ public abstract class Animal extends LivingSpecies implements Reproducers,Movabl
         this.status = status;
     }
 
+    @Override
+    public void die() {
+        validatePresence("die");
+        System.out.println("The " + race + " dies.");
+        setPresence(false);
+        setHealth(0);
+        setStatus(false);
+    }
+
+    @Override
+    public void disappear() {
+        validatePresence("disappear");
+        System.out.println("The " + race + " disappears.");
+        setPresence(false);
+        setStatus(false);
+    }
+
+    public int hunt() {
+        validatePresence("hunt");
+        // Par défaut, l'animal ne chasse pas.
+        System.out.println("This animal does not hunt.");
+        return 0;
+    }
+
+    public int flee() {
+        validatePresence("flee");
+        // Par défaut, l'animal ne fuit pas ou ne sait pas comment fuir
+        System.out.println("This animal does not flee.");
+        return 0;
+    }
 }
