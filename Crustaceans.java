@@ -1,9 +1,14 @@
-public class Crustaceans extends Animals implements Survivor,Reproducers {
+public class Crustaceans extends Animal implements Survivor {
+    private String crustaceanName;
     private boolean edible;
 
-    public Crustaceans(int health, boolean fertility, boolean presence, String race, boolean status, boolean edible) {
+    public Crustaceans(int health, boolean fertility, boolean presence, String race, boolean status, String crustaceanName, boolean edible) {
         super(health, fertility, presence, race, status);
         this.edible = edible;
+    }
+
+    public String getCrustaceanName() {
+        return crustaceanName;
     }
 
     public boolean isEdible() {
@@ -20,7 +25,14 @@ public class Crustaceans extends Animals implements Survivor,Reproducers {
         // Implementation of reproduction behavior
         validatePresence("reproduce");
         System.out.println("The crustacean reproduces.");
-        return new Crustaceans(getHealth(), isFertility(), isPresence(), this.getType(), isStatus(), this.edible);
+        return new Crustaceans(getHealth(), isFertility(), isPresence(), this.getRace(), isStatus(), getCrustaceanName(),this.edible);
+    }
+
+    @Override
+    public boolean move(){
+        validatePresence("move to a new location");
+        System.out.println("The "+crustaceanName+" moves to a new location.");
+        return true;
     }
 
     @Override
@@ -43,17 +55,6 @@ public class Crustaceans extends Animals implements Survivor,Reproducers {
         setPresence(false);
     }
 
-    @Override
-    public void hunting() {
-        // Implementation of hunting behavior
-        validatePresence("hunting");
-        System.out.println("The crustacean is hunting.");
-    }
 
-    @Override
-    public void flee() {
-        // Implementation of fleeing behavior
-        validatePresence("flee");
-        System.out.println("The crustacean flees.");
-    }
+
 }

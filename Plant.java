@@ -1,8 +1,8 @@
-public class Plants extends LivingSpecies implements Survivor,Reproducers{
+public class Plant extends LivingSpecies implements Survivor{
     private float density;
     private boolean isVenomous; // Indique si la plante est vénéneuse
 
-    public Plants(int health, boolean fertility, boolean presence, float density, boolean isVenomous) {
+    public Plant(int health, boolean fertility, boolean presence, float density, boolean isVenomous) {
         super(health, fertility, presence);
         this.density = density;
         this.isVenomous = isVenomous;
@@ -34,7 +34,7 @@ public class Plants extends LivingSpecies implements Survivor,Reproducers{
     public LivingSpecies reproduce() {
         // Implementation for plant reproduction
         System.out.println("Plant is reproducing.");
-        return new Plants(getHealth(), isFertility(), isPresence(), density, isVenomous);
+        return new Plant(getHealth(), isFertility(), isPresence(), density, isVenomous);
     }
 
     @Override
