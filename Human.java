@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Random;
 public class Human extends LivingSpecies implements Survivor,Polluters{
     private String job;
 
@@ -48,10 +48,13 @@ public class Human extends LivingSpecies implements Survivor,Polluters{
         System.out.println(job + " has disappeared.");
     }
 
-    public String fishing(String fishType) {
+    public int fishing(String fishType) {
         validatePresence("fish");
-        System.out.println(job + " has caught a " + fishType+ "!");
-        return  fishType;
+        int amountFished = new Random().nextInt(10) + 1;
+
+        System.out.println(job + " has caught " + amountFished + " " + fishType + (amountFished > 1 ? "s" : "") + "!");
+        return amountFished;
+
     }
 
     @Override
@@ -62,37 +65,20 @@ public class Human extends LivingSpecies implements Survivor,Polluters{
     }
 
 
-    public void regulate(Climate climate) {
+    public String regulate(Climate climate) {
         validatePresence("regulate");
 
-        Season currentSeason = climate.getCurrentSeason(); // Obtenir la saison actuelle
+        Season currentSeason = climate.getCurrentSeason();
         System.out.println(job + " is regulating fishing based on the current climate: " + currentSeason);
 
-        String targetFish;
-
-        switch (currentSeason) {
-            case SPRING:
-                targetFish = "Tuna";
-                break;
-            case SUMMER:
-                targetFish = "Octopus";
-                break;
-            case AUTUMN:
-                targetFish = "Shark";
-                break;
-            case WINTER:
-                targetFish = "Sardine";
-                break;
-            default:
-                targetFish = null;
-        }
-
-        if (targetFish != null) {
+        String targetFish = switch (currentSeason) {
+            case SPRING -> "Tuna";
+            case SUMMER -> "Octopus";
+            case AUTUMN -> "Shark";
+            case WINTER -> "Sardine";
+        };
             System.out.println("Targeting fish for the season: " + targetFish);
-            fishing(targetFish); // Pêcher le type de poisson défini pour la saison
-        } else {
-            System.out.println("No suitable fish detected for this season.");
-        }
+            return targetFish;
     }
 
 

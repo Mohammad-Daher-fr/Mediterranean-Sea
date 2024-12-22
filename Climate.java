@@ -95,6 +95,28 @@ public class Climate {
         }
     }
 
+    public boolean overheat() {
+        double threshold; // Définir le seuil de surchauffe en fonction de la saison
+        switch (currentSeason) {
+            case SPRING:
+                threshold = 30; // Par exemple, 30°C pour le printemps
+                break;
+            case SUMMER:
+                threshold = 40; // Par exemple, 40°C pour l'été
+                break;
+            case AUTUMN:
+                threshold = 25; // Par exemple, 25°C pour l'automne
+                break;
+            case WINTER:
+                threshold = 10; // Par exemple, 10°C pour l'hiver
+                break;
+            default:
+                threshold = 20;
+        }
+
+        return temperature > threshold; // Retourne vrai si la température dépasse le seuil
+    }
+
     private double randomInRange(double min, double max) {
         return min + (max - min) * random.nextDouble();
     }

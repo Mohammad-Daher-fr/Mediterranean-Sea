@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class Animal extends LivingSpecies implements Reproducers,Movable{
+public abstract class Animal extends LivingSpecies implements Reproducers,Movable,Survivor{
     private String race;
     private boolean status;
 
@@ -28,6 +25,13 @@ public abstract class Animal extends LivingSpecies implements Reproducers,Movabl
     }
 
     @Override
+    public void consumeResources(int foodAmount) {
+        validatePresence("eat");
+        setHealth(getHealth() + foodAmount);
+        System.out.println("The " + getRace() + " eats " + foodAmount + " units of food.");
+    }
+
+    @Override
     public void die() {
         validatePresence("die");
         System.out.println("The " + race + " dies.");
@@ -44,17 +48,10 @@ public abstract class Animal extends LivingSpecies implements Reproducers,Movabl
         setStatus(false);
     }
 
-    public int hunt() {
-        validatePresence("hunt");
-        // Par défaut, l'animal ne chasse pas.
-        System.out.println("This animal does not hunt.");
-        return 0;
-    }
-
-    public int flee() {
-        validatePresence("flee");
-        // Par défaut, l'animal ne fuit pas ou ne sait pas comment fuir
-        System.out.println("This animal does not flee.");
-        return 0;
+    @Override
+    public boolean move(){
+        validatePresence("move to a new location");
+        System.out.println("The "+getRace()+" moves to a new location.");
+        return true;
     }
 }

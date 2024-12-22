@@ -1,9 +1,9 @@
 import java.util.Random;
 
-public class OilTanker extends Vehicle {
+public class OilTanker extends Vehicle implements OilDriller {
     private double oilCapacity;
     private double maxOilCapacity;
-    private double damageLevel;
+    private int strength;
 
     private static final Random random = new Random();
 
@@ -11,29 +11,36 @@ public class OilTanker extends Vehicle {
         super(name);
         this.oilCapacity = 0;
         this.maxOilCapacity = maxOilCapacity;
-        this.damageLevel = 0.0;
     }
 
     public double getOilCapacity() {
         return oilCapacity;
     }
 
-    public double getDamageLevel() {
-        return damageLevel;
-    }
 
     @Override
     public void displayInfo() {
         System.out.println("Oil Tanker: " + getName() +
                 ", Current Oil: " + String.format("%.1f", oilCapacity) + " barrels" +
                 ", Max Capacity: " + String.format("%.1f", maxOilCapacity) + " barrels" +
-                ", Damage Level: " + String.format("%.1f", damageLevel) + "%.");
+                ", Damage Level: " + String.format("%.1f", getDamageLevel()) + "%.");
     }
 
+    @Override
+    public void repair() {
+        double repairAmount = random.nextDouble() * 30; // Repair between 0 and 30%
+        setDamageLevel(getDamageLevel()- repairAmount);
+        if (getDamageLevel() < 5) {  // Ensure a minimum damage level of 5%
+            setDamageLevel(5);
+        }
+        System.out.println("Repaired " + String.format("%.1f", repairAmount) + "%. Current damage level: " + String.format("%.1f", getDamageLevel()) + "%.");
+    }
+
+    @Override
     public void drillOil() {
-        if (damageLevel >= 100) {
+        if (getDamageLevel() >= 100) {
             System.out.println("The tanker is too damaged to drill oil.");
-            return;
+
         }
 
         double oilDrilled = random.nextDouble() * 200; // Drill between 0 and 200 barrels
@@ -42,18 +49,11 @@ public class OilTanker extends Vehicle {
         }
 
         oilCapacity += oilDrilled;
-        damageLevel += oilDrilled * 0.02; // Increase damage slightly
+        setDamageLevel(getDamageLevel()+ oilDrilled * 0.02); // Increase damage slightly
         System.out.println("Drilled " + String.format("%.1f", oilDrilled) + " barrels of oil.");
 
     }
 
-    public void repair() {
-        double repairAmount = random.nextDouble() * 30; // Repair between 0 and 30%
-        damageLevel -= repairAmount;
-        if (damageLevel < 5) {  // Ensure a minimum damage level of 5%
-            damageLevel = 5;
-        }
-        System.out.println("Repaired " + String.format("%.1f", repairAmount) + "%. Current damage level: " + String.format("%.1f", damageLevel) + "%.");
-    }
+
 
 }
