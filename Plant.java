@@ -71,4 +71,13 @@ public class Plant extends LivingSpecies implements Survivor{
         }
     }
 
+    @Override
+    public void displayInfos(){
+        System.out.println(" Density: " + getDensity() +
+                ", Venomous: " + isVenomous() +
+                ", Health: " + getHealth() +
+                ", Fertility: " + isFertility() +
+                ", Presence: " + isPresence()+".");
+    }
+
 }

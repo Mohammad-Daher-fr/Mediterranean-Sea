@@ -54,4 +54,13 @@ public class Prey extends Animal implements Survivor {
         System.out.println("Prey migrated.");
     }
 
+    @Override
+    public void displayInfos(){
+        System.out.println(" CorrespondingPredator: " + getCorrespondingPredator() +
+                ", School: " + isSchool() +
+                ", Health: " + getHealth() +
+                ", Fertility: " + isFertility() +
+                ", Presence: " + isPresence()+".");
+    }
+
 }

@@ -27,5 +27,12 @@ public class Crustacean extends Animal implements Survivor {
         System.out.println("The "+getRace()+" reproduces.");
         return new Crustacean(getHealth(), isFertility(), isPresence(), this.getRace(), isStatus(),this.edible);
     }
+    @Override
+    public void displayInfos(){
+        System.out.println(" Edible: " + isEdible() +
+                ", Health: " + getHealth() +
+                ", Fertility: " + isFertility() +
+                ", Presence: " + isPresence()+".");
+    }
 
 }

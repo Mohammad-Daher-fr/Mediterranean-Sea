@@ -54,4 +54,13 @@ public abstract class Animal extends LivingSpecies implements Reproducers,Movabl
         System.out.println("The "+getRace()+" moves to a new location.");
         return true;
     }
+
+    @Override
+    public void displayInfos(){
+        System.out.println(" Race: " + getRace() +
+                ", Status: " + isStatus() +
+                ", Health: " + getHealth() +
+                ", Fertility: " + isFertility() +
+                ", Presence: " + isPresence()+".");
+    }
 }

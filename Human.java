@@ -81,5 +81,13 @@ public class Human extends LivingSpecies implements Survivor,Polluters{
             return targetFish;
     }
 
+    @Override
+    public void displayInfos(){
+        System.out.println(" Job: " + getJob() +
+                ", Health: " + getHealth() +
+                ", Fertility: " + isFertility() +
+                ", Presence: " + isPresence()+".");
+    }
+
 
 }

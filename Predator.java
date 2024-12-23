@@ -36,5 +36,13 @@ public class Predator extends Animal {
         return amount;
     }
 
+    @Override
+    public void displayInfos(){
+        System.out.println(" CorrespondingPrey: " + getCorrespondingPreys() +
+                ", Health: " + getHealth() +
+                ", Fertility: " + isFertility() +
+                ", Presence: " + isPresence()+".");
+    }
+
 }
 

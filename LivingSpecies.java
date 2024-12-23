@@ -1,4 +1,4 @@
-public abstract class LivingSpecies implements Reproducers {
+public abstract class LivingSpecies implements Reproducers,Display {
     private int health;
     private boolean fertility;
     private boolean presence;
