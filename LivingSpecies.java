@@ -1,4 +1,4 @@
-public abstract class LivingSpecies implements Reproducers,Display {
+public abstract class LivingSpecies implements Display {
     private int health;
     private boolean fertility;
     private boolean presence;
@@ -42,6 +42,9 @@ public abstract class LivingSpecies implements Reproducers,Display {
     public abstract void die();
 
     public abstract void disappear();
+
+    public abstract LivingSpecies reproduce();
+
 }
 
 

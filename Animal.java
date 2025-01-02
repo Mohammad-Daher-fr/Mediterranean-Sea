@@ -1,4 +1,4 @@
-public abstract class Animal extends LivingSpecies implements Reproducers,Movable,Survivor{
+public abstract class Animal extends LivingSpecies implements Movable,Survivor{
     private String race;
     private boolean status;
 
