@@ -24,4 +24,9 @@ public abstract class Vehicle {
     // Abstract method for specific behavior
     public abstract void displayInfo();
     public abstract void repair();
+
+    public void pollute(Climate climate, double amount) {
+        climate.incrementPollution(amount);
+        System.out.println(name + " polluted the environment by " + amount + " units.");
+    }
 }

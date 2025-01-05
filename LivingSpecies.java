@@ -1,4 +1,4 @@
-public abstract class LivingSpecies implements Display {
+public abstract class LivingSpecies  {
     private int health;
     private boolean fertility;
     private boolean presence;
@@ -44,6 +44,9 @@ public abstract class LivingSpecies implements Display {
     public abstract void disappear();
 
     public abstract LivingSpecies reproduce();
+
+    public abstract void displayInfos();
+
 
 }
 

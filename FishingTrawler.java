@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class FishingTrawler extends Vehicle implements Movable {
+public class FishingTrawler extends Vehicle implements Movable, Chargeable {
     private double fishCapacity;
     private double maxFishCapacity;
 
@@ -30,6 +30,18 @@ public class FishingTrawler extends Vehicle implements Movable {
         System.out.println("Fishing boat is moving to a new fishing area.");
         return true;
     }
+
+    @Override
+    public void charge() {
+        System.out.println("Recharging fishing trawler with nets and baits.");
+    }
+
+    @Override
+    public void pollute(Climate climate, double amount) {
+        climate.incrementPollution(amount);
+        System.out.println(getName() + " polluted the sea with discarded fishing nets.");
+    }
+
 
     public void fish() {
         double fishCaught = random.nextDouble() * 20; // Catch up to 20 tons

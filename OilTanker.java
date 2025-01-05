@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class OilTanker extends Vehicle implements OilDriller {
+public class OilTanker extends Vehicle implements Movable, Chargeable {
     private double oilCapacity;
     private double maxOilCapacity;
     private int strength;
@@ -17,6 +17,11 @@ public class OilTanker extends Vehicle implements OilDriller {
         return oilCapacity;
     }
 
+    @Override
+    public void charge() {
+        System.out.println("Charging the fishing trawler with supplies and fuel.");
+    }
+
 
     @Override
     public void displayInfo() {
@@ -24,6 +29,17 @@ public class OilTanker extends Vehicle implements OilDriller {
                 ", Current Oil: " + String.format("%.1f", oilCapacity) + " barrels" +
                 ", Max Capacity: " + String.format("%.1f", maxOilCapacity) + " barrels" +
                 ", Damage Level: " + String.format("%.1f", getDamageLevel()) + "%.");
+    }
+
+    @Override
+    public void pollute(Climate climate, double amount) {
+        climate.incrementPollution(amount);
+        System.out.println(getName() + " spilled oil into the ocean.");
+    }
+    @Override
+    public boolean move() {
+        System.out.println("Fishing boat is moving to a new fishing area.");
+        return true;
     }
 
     @Override
@@ -36,7 +52,6 @@ public class OilTanker extends Vehicle implements OilDriller {
         System.out.println("Repaired " + String.format("%.1f", repairAmount) + "%. Current damage level: " + String.format("%.1f", getDamageLevel()) + "%.");
     }
 
-    @Override
     public void drillOil() {
         if (getDamageLevel() >= 100) {
             System.out.println("The tanker is too damaged to drill oil.");
